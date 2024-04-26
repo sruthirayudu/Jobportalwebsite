@@ -1,0 +1,302 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<style>
+    form-control:disabled, .form-control:read-only {
+     background-color: white;
+     color:grey;
+       
+    }
+.error{
+
+    color:red;
+}
+h3{
+    color:#00B074;
+}
+
+
+</style>
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Edit The Post</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Edit The Post , {{username}}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+<!-- Header End -->
+<div align="center">
+<div class="col-md-10" >
+    <form method="post" id="EditJobForm" name="EditJobForm">
+        {% csrf_token %}
+        {{ serializer.errors }}
+     <div>   <h3><div id="edit-success-message"></h3></div>
+      <div>   <input type="hidden" id="id" name="id" value="{{info.id}}">
+               <div class="row g-3">
+                   <div class="col-md-6">
+                       <div class="form-floating">
+                           <input type="text" class="form-control" id="title" name="title" placeholder="Job title " value="{{info.title}}">
+                           <label for="title">Job Title</label>
+                           <div id="titleError" style="color:red"></div>
+                       </div>
+                   </div>
+                  
+
+
+                   <div class="col-6">
+                    <div class="form-floating">
+                        <select name="jobcat" id="editjobcatdrop" class="form-control" >
+                            <option value="">Job Category</option>
+                            {% for category in data %}
+                            <option value="{{ category.id }}" {% if category.id == info.job_category %}selected{% endif %}>
+                                {% if category.id == info.job_category %}{{ category.title }}{% else %}{{ category.title }}{% endif %}
+                                {% endfor %}
+                          </select>
+                          <div id="jobcatError"></div>
+                    </div>
+
+                </div>
+
+                   <div class="col-12">
+                       <div class="form-floating">
+                           <textarea class="form-control" id="description" name="description" rows="6"  placeholder="Enter job Description" required> {{info.description}}</textarea>
+                           <label for="description">Job Description</label>
+                           <div id="descriptionError"></div>
+                       </div>
+                   </div>
+                   <div class="col-12">
+                       <div class="form-floating">
+                        <textarea class="form-control" id="role" name="role" rows="3"  placeholder="Enter job Responsibilities" required>{{info.role}}</textarea>                        
+                           <label for="role">Job Responsibilities </label>
+                           <div id="roleError"></div>
+                       </div>
+                   </div>
+
+                   <div class="col-12">
+                
+                    <div class="form-floating">
+                        <textarea class="form-control" id="jobsumm" name="jobsumm" rows="3"   placeholder="Enter job Summary" required>{{info.job_summary}}</textarea>
+                        
+                        <label for="jobsumm">Job Summary  </label>
+                        <div id="jobsummError"></div>
+                  </div>
+                </div>
+    
+                   
+                   <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="skills" name="skills" placeholder="Skills Required " value="{{info.skills}}">
+                        <label for="skills">Skills Required</label>
+                        <div id="skillsError" style="color:red"></div>
+                    </div>
+                </div>
+                   
+   
+                 <div class="col-6">
+                   <div class="form-floating">
+                   <select name="Qualification" id="editqualifyDropdown" class="form-control" >
+                       <option value="">Qualification</option>
+                         
+                       {% for qua in qualis  %}
+                       <option value="{{ qua.id }}" {% if qua.id == 2 %}selected{% endif %}>
+                           {% if qua.id == info.qualification %}{{ qua.Qualification }}{% else %}{{ qua.Qualification }}{% endif %}
+                           <option value="">{{qua.id}}</option>
+                           {% endfor %}
+
+                        </option>
+                       
+                     </select>
+                     <div id="qualifyError"></div>
+                 </div>
+               </div>
+               
+               <div class="col-6">
+                   <div class="form-floating">
+                     <select id="estateDropdown" name="statee" class="form-control">
+                        <option value="">Select State</option>
+                        {% for sta in staname  %}
+                        <option value="{{ sta.id }}" {% if sta.id == info.state %}selected{% endif %}>
+                            {% if sta.id == info.city %}{{ sta.statename }}{% else %}{{ sta.statename }}{% endif %}
+                        
+                            {% endfor %}
+                    </select>
+                     <div id="stateError"></div>
+                 </div>
+               </div>
+               
+               <div class="col-6">
+                   <div class="form-floating">
+                   <select name="city" id="cityDropdown" class="form-control" >
+                       <option value="">City</option>
+                       {% for city in citynames  %}
+                       <option value="{{ city.id }}" {% if city.id == info.city %}selected{% endif %}>
+                           {% if city.id == info.city %}{{ city.citynames }}{% else %}{{ city.citynames }}{% endif %}
+                       
+                           {% endfor %}
+
+                     </select>
+                     <div id="cityError"></div>
+                 </div>
+               </div>
+            
+                
+               <div class="col-6">
+                   
+                   <div class="form-floating">
+                       <input type="text" class="form-control" id="salary" name="salary" placeholder="Salary Package.. " value="{{info.salary}} ">
+                       <label for="salary">Salary </label>
+                       <div id="salaryError"></div>
+                 </div>
+               </div>
+   
+               <div class="col-6">
+                   
+                <div class="form-floating">
+
+                    <select name="job_type" id="job_type" class="form-control" >
+                    <option value="">Job Type</option>
+
+                    <option value="Remote" {% if info.job_type == "Remote" %}selected{% endif %}>Remote</option>
+
+                    <option value="WFH" {% if info.job_type == "WFH" %}selected{% endif %}>Work From Home</option>
+                    <option value="Full-time" {% if info.job_type == "Full-time" %}selected{% endif %}>Full Time</option>
+                    <option value="Part-time" {% if info.job_type == "Part-time" %}selected{% endif %}>Part Time</option>
+                                    </select>
+                    
+
+                    <label for="job_type"> </label>
+                    <div id="job_typeError"></div>
+              </div>
+            </div>
+
+
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="vacancy" name="vacancy" placeholder="No of Vcancies " value="{{info.vacancies}}">
+                   <label for="vacancy">Vacancy Position </label>
+                  <div id="vacancyError"></div>
+              </div>
+            </div>
+         
+             
+            <div class="col-6">
+                
+                <div class="form-floating">
+                     <input type="date" id="joindate" name="joindate"  min="20-4-2024"  class="form-control" value="{{formatted_date}}" required>
+
+                
+                    <label for="joindate">Closing Date  </label>
+                    <div id="joindateError"></div>
+              </div>
+            </div>
+            
+            
+            <div class="col-12">
+                
+                <div class="form-floating">
+                    <textarea class="form-control" id="comp" name="comp" rows="3"   placeholder="Enter Company Details " required>{{info.comp_dtls}}</textarea>
+                    
+                    <label for="comp">Company Details  </label>
+                    <div id="compError"></div>
+              </div>
+            </div>
+
+            
+            <div class="col-6">
+                <div class="form-floating">
+                    <select name="preference" id="preference" class="form-control" >
+                        <option value="">Job Prefence</option>                      
+                        <option value="Fresher" {% if info.preference == "Fresher" %}selected{% endif %}> Fresher</option>
+                        <option value="Experienced" {% if info.preference == "Experienced" %}selected{% endif %}>Experienced</option>
+                        <option value="1 yr Experience" {% if info.preference == "1 yr Experience" %}selected{% endif %}> 1 yr Experience</option>
+                        <option value="Above 1yr Experience" {% if info.preference == "Above 1yr Experience" %}selected{% endif %}>Above 1yr Experience</option>
+                        <option value="Above 2yr Experience" {% if info.preference == "Above 2yr Experience" %}selected{% endif %}>Above 2yr Experience</option>
+                        <option value="Above 5yr Experience" {% if info.preference == "Above 5yr Experience" %}selected{% endif %}>Above 5yr Experience</option>
+                        <option value="Above 10yr Experience" {% if info.preference == "Above 10yr Experience" %}selected{% endif %}>Above 10yr Experience</option>
+                      </select>
+                   <label for="preference">Preference  </label>
+                  <div id="preferenceError"></div>
+              </div>
+            </div>
+
+            <div class="col-6">
+                
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="compname" name="compname" placeholder="Company Name " value="{{info.compname}}">
+                    <label for="compname">Company Name  </label>
+                    <div id="compnameError"></div>
+              </div>
+            </div>
+
+            
+         
+            
+            <div class="col-6">
+                <div class="form-floating">
+                  
+                    <input type="file" class="form-control" id="logo" name="logo" placeholder="Company Logo " accept="image/*">
+                   <label for="logo">Company Logo </label>
+                  <div id="logoError"></div>
+              </div>
+            </div>
+         
+            <div class="col-6">
+                <div class="form-floating">
+                  <img src="{{info.comp_logo.url}}" width="100px" height="75px">
+                   
+                   
+                  <div id="logoError"></div>
+              </div>
+            </div>
+            
+
+
+
+                   
+   
+                   <div class="col-12">
+                       <button class="btn btn-primary w-100 py-3" id="submit" name="submit" type="submit" >Post The Job</button>
+                      
+                   </div>
+               </div>
+           </form>
+       
+    
+  
+
+
+
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

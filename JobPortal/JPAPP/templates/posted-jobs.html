@@ -1,0 +1,303 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Yours Jobs List</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Posted Jobs List</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+    
+        <!-- Jobs Start -->
+
+        {% if messages %}
+        <div align="center" >
+    
+        {% for message in messages %}
+         <h3 style=" color: #096848 ">   {% if message.tags %} {% endif %}{{ message }}  </h3>
+        {% endfor %}
+    
+</div>
+{% endif %}
+        <div class="container-xxl py-5">
+            <div class="container">
+                <a href="/profile_page/">Back</a>
+                <h1 class="text-center mb-5 " >Job Posted By You....</h1>
+                <div class="tab-class text-center wow" >
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill"  href="#tab-1" >
+                                <h6 class="mt-n1 mb-0">Featured</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3 " data-bs-toggle="pill"  href="#tab-2" >
+                                <h6 class="mt-n1 mb-0">Full Time</h6>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                                <h6 class="mt-n1 mb-0">Part Time</h6>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-4">
+                                <h6 class="mt-n1 mb-0">WFH</h6>
+                            </a>
+                        </li>
+                    </ul>
+
+                    {% comment %}
+                        all type of jobs
+                    {% endcomment %}
+
+                    <div class="tab-content">
+                        
+                        <div id="tab-1"  class="tab-pane fade show p-0 active" >
+                            {% if info %}
+                            {% for jobs in info %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="/media/{{jobs.5}}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">{{jobs.1}} </h5>
+
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>  {{ jobs.7 }}, {{ jobs.6 }}</span>
+                                          
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{jobs.2}} </span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{jobs.3}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-4">
+                                            {% if jobs.8 == 1  %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{jobs.0}}" title="Status"><i class="fa fa-check-circle text-primary"></i></a>
+                                            {% else %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{jobs.0}}" title="Status"><i class="fa fa-times-circle text-primary"></i></a>
+                                            {% endif %}
+                                            <a class="btn btn-light btn-square me-3" href="/edit_view/{{jobs.0}}" title="Edit Your Job"><i class="fa fa-edit text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/apply_job/{{jobs.0}}" title="View Your Job"><i class="fa fa-server text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/del_job/{{jobs.0}}" title="Delete Your Job"><i class="fa fa-trash text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/applications/{{jobs.0}}" title="Applications For Your Job"><i class="fa fa-users text-primary"></i></a> 
+
+                                           {% comment %}
+                                             <a class="btn btn-primary" href="/apply_job/{{jobs.0}}">View Applications</a>
+                                           {% endcomment %}
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ jobs.4}}</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endfor%}
+                            
+                            {% else %}
+                            <p><h3>Right Now No Jobs Posted By You...</h3> </p>
+                              {% endif %}
+
+
+                            
+                            
+                           
+                        </div>
+
+
+                         
+                        {% comment %}
+                            fulll time jobs 
+                        {% endcomment %}
+
+                        <div id="tab-2"  class="tab-pane fade show p-0" >
+                            {% if Fulldata %}
+                            {% for full in Fulldata %}
+                            
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="/media/{{full.5}}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">{{full.1}}</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ full.7 }}, {{ full.6 }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{full.2}}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{full.3}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-4">
+
+                                            {% if full.8 == 1  %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{full.0}}" title="Status"><i class="fa fa-check-circle text-primary"></i></a>
+                                            {% else %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{full.0}}" title="Status"><i class="fa fa-times-circle text-primary"></i></a>
+                                            {% endif %}
+                                            <a class="btn btn-light btn-square me-3" href="/edit_view/{{full.0}}" title="Edit Your Job"><i class="fa fa-edit text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/apply_job/{{full.0}}" title="View Your Job"><i class="fa fa-server text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/del_job/{{full.0}}" title="Delete Your Job"><i class="fa fa-trash text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/applications/{{full.0}}" title="Applications For Your Job"><i class="fa fa-users text-primary"></i></a> 
+
+                                        {% comment %}
+                                                <a class="btn btn-primary" href="/apply_job/{{full.0}}">View Applications</a>
+                                        {% endcomment %}
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ full.4}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% endfor%}
+
+                           
+                            
+                          
+                            {% else %}
+                                
+                                <p><h3>Right Now No Full Time Jobs Posted By You...</h3> </p>
+                            {% endif %}
+
+
+                          
+                           
+                        </div>
+
+
+
+
+
+
+                     {% comment %}
+                           part time jobs tabs
+                     {% endcomment %}
+
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            {% if partdata %}
+                            {% for part in partdata %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="/media/{{part.5}}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">{{part.1}}</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ part.7 }}, {{ part.6 }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{part.2}} </span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{part.3}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-4">
+
+                                            {% if part.8 == 1  %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{part.0}}" title="Status"><i class="fa fa-check-circle text-primary"></i></a>
+                                            {% else %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{part.0}}" title="Status"><i class="fa fa-times-circle text-primary"></i></a>
+                                            {% endif %}
+                                            
+                                            <a class="btn btn-light btn-square me-3" href="/edit_view/{{part.0}}" title="Edit Your Job"><i class="fa fa-edit text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/apply_job/{{part.0}}" title="View Your Job"><i class="fa fa-server text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/del_job/{{part.0}}" title="Delete Your Job"><i class="fa fa-trash text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/applications/{{part.0}}" title="Applications For Your Job"><i class="fa fa-users text-primary"></i></a> 
+
+                                           {% comment %}
+                                            
+                                             <a class="btn btn-primary" href="/apply_job/?id={{part.0}}">View Applications</a>
+                                           {% endcomment %}
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ part.4}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor%}>
+
+                         
+                            {% comment %}
+                                <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                            {% endcomment %}
+                            {% else %}
+                            
+                            <p><h3>Right Now No Part Time  Jobs  Posted By You...</h3> </p>
+                        {% endif %}
+                        </div>
+
+
+
+
+                        <div id="tab-4" class="tab-pane fade show p-0">
+                            {% if wfhs %}
+                            {% for wfh in wfhs %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="/media/{{wfh.5}}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-3">{{wfh.1}}</h5>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ wfh.7 }}, {{ wfh.6 }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{wfh.2}} </span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{wfh.3}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-4">
+                                            {% if wfh.8 == 1  %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{wfh.0}}" title="Status"><i class="fa fa-check-circle text-primary"></i></a>
+                                            {% else %}
+                                            <a class="btn btn-light btn-square me-3" href="/status_job/{{wfh.0}}" title="Status"><i class="fa fa-times-circle text-primary"></i></a>
+                                            {% endif %}
+                                            
+                                            <a class="btn btn-light btn-square me-3" href="/edit_view/{{wfh.0}}" title="Edit Your Job"><i class="fa fa-edit text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/apply_job/{{wfh.0}}" title="View Your Job"><i class="fa fa-server text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/del_job/{{wfh.0}}" title="Delete Your Job"><i class="fa fa-trash text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3" href="/applications/{{wfh.0}}" title="Applications For Your Job"><i class="fa fa-users text-primary"></i></a> 
+
+                                            
+                                           {% comment %}
+                                             <a class="btn btn-primary" href="/apply_job/{{wfh.0}}">View Applications </a>
+                                           {% endcomment %}
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ wfh.4}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor%}
+
+                         
+                            {% else %}
+                            <p><h3>Right Now No WFH Jobs  Posted By You...</h3> </p>
+                        {% endif %}
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Jobs End -->
+
+
+    {% endblock %}

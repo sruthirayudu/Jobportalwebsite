@@ -1,0 +1,173 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<style>
+    form-control:disabled, .form-control:read-only {
+     background-color: white;
+     color:grey;
+       
+    }
+.error{
+
+    color:red;
+}
+h3{
+    color:#00B074;
+}
+
+
+</style>
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Registration</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Registration</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+<!-- Header End -->
+<div align="center">
+<div class="col-md-10" >
+    <form method="post" id="registrationForm" name="registrationForm">
+        {% csrf_token %}
+        {{ serializer.errors }}
+     <div>   <h3><div id="registration-success-message"></h3></div>
+      <div>
+               <div class="row g-3">
+                   <div class="col-md-6">
+                       <div class="form-floating">
+                           <input type="text" class="form-control" id="name" name="name" placeholder="User Name">
+                           <label for="name">User Name</label>
+                           <div id="usernameError" style="color:red"></div>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="form-floating">
+                           <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+                           <label for="email">Your Email</label>
+                           <div id="emailError" style="color:red"></div>
+                       </div>
+                   </div>
+                   <div class="col-6">
+                       <div class="form-floating">
+                           <input type="text" class="form-control" id="pass" name="pass" placeholder="Password">
+                           <label for="pass">Password</label>
+                           <div id="passwordError"></div>
+                       </div>
+                   </div>
+                   <div class="col-6">
+                       <div class="form-floating">
+                           <input type="text" class="form-control" id="conpass" name="conpass" placeholder="Confirm Password">
+                           <label for="conpass">Confirm Password</label>
+                           <div id="conpassError"></div>
+                       </div>
+                   </div>
+                   
+                   <div class="col-6">
+                       <div class="form-floating">
+                           <select name="gender" id="gender" class="form-control" >
+                               <option value="">Gender</option>
+                               <option value="Male">Male</option>
+                               <option value="Female">Female</option>
+                               <option value="Other">Other</option>
+                             </select>
+                             <div id="genderError"></div>
+                       </div>
+
+                   </div>
+                   
+   
+                 <div class="col-6">
+                   <div class="form-floating">
+                   <select name="Qualification" id="qualifyDropdown" class="form-control" >
+                       <option value="">Qualification</option>
+                       
+                     </select>
+                     <div id="qualifyError"></div>
+                 </div>
+               </div>
+               
+               <div class="col-6">
+                   <div class="form-floating">
+                     <select id="stateDropdown" name="state" class="form-control">
+                        <option value="">Select State</option>
+                    </select>
+                     <div id="stateError"></div>
+                 </div>
+               </div>
+               
+               <div class="col-6">
+                   <div class="form-floating">
+                   <select name="city" id="cityDropdown" class="form-control" >
+                       <option value="">City</option>
+                     </select>
+                     <div id="cityError"></div>
+                 </div>
+               </div>
+            
+                
+               <div class="col-6">
+                   
+                   <div class="form-floating">
+                       <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile No...... ">
+                       <label for="mobile">Mobile No</label>
+                       <div id="mobileError"></div>
+                 </div>
+               </div>
+   
+               <div class="col-6">
+                   
+                <div class="form-floating">
+                    <input type="file" class="form-control" id="img" name="img" placeholder="PROFILE PIC " accept="image/*">
+                    <label for="img">Profile Pic </label>
+                    <div id="imgError"></div>
+              </div>
+            </div>
+
+                   
+   
+                   <div class="col-12">
+                       <button class="btn btn-primary w-100 py-3" id="submit" name="submit" type="submit" >Registration</button>
+                      
+                   </div>
+               </div>
+           </form>
+       
+    
+  
+
+
+
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<style>
+    form-control:disabled, .form-control:read-only {
+     background-color: white;
+     color:grey;
+       
+    }
+.error{
+
+    color:red;
+}
+h3{
+    color:#00B074;
+}
+
+
+</style>
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Tell Me More About Youself</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Share Your Additional Information </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+<!-- Header End -->
+<div align="center">
+<div class="col-md-10" >
+    <form method="post" id="profiledata" name="profiledata">
+        {% csrf_token %}
+        {{ serializer.errors }}
+     <div>   <h3><div id="login-success-message"></h3></div>
+      <div>
+               <div class="row g-3">
+                    <input type="hidden" id="user_id" name="user_id" value='{{user_id}}'>
+             
+                    <div class="col-md-12">
+                     <textarea class="form-control" id="about" name="about" rows="6"  placeholder="Tell  About Yourself " required>{{ query.0.about }}</textarea>
+                      <div id="titleError" style="color:red"></div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <textarea class="form-control" id="edu" name="edu" rows="6" placeholder="Tell  About your Education  " required> {{ query.0.education }}</textarea>
+                         <div id="eduError" style="color:red"></div>
+                       </div>
+
+                    <div class="col-6">
+                        <div class="form-floating">
+                           <input type="text" class="form-control" id="comp" name="comp"  value="{{ query.0.company }}" placeholder="Present your company name..........." >
+                           <label for="cname">Company Name</label>
+                           <div id="cnameError" style="color:red"></div>
+                       </div>
+                   </div>
+
+                    
+                   <div class="col-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="pro" name="pro" value="{{ query.0.designation }}" placeholder="Present your Designation..........." >
+                          
+                           <label for="pro">Your Designation</label>
+                           <div id="proError"></div>
+                    </div>
+                   </div>
+
+
+                    <div class="col-md-12">
+                        <textarea class="form-control" id="job" name="job" rows="6"   placeholder="Tell About your Job Responsibilities....... " required>{{ query.0.job_responsibilities }}</textarea>
+                       <div id="jobError"></div>
+                 </div>
+
+
+                 
+                 <div class="col-md-12">
+                    <textarea class="form-control" id="exp" name="exp" rows="6"  placeholder="Tell About your Job Experience....... " required>{{ query.0.job_experience }}</textarea>
+                   <div id="expError"></div>
+             </div>
+
+
+                  
+   
+                   <div class="col-12">
+                       <button class="btn btn-primary w-100 py-3" id="submit" name="submit" type="submit" >Post It </button>
+                      
+                   </div>
+               </div>
+           </form>
+       
+    
+  
+
+
+
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

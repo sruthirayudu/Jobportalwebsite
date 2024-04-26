@@ -1,0 +1,142 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<style>
+    /* Basic styling */
+  
+   
+    .profile-info {
+      background:#d2e8d257
+    }
+    .profile-info h2 {
+        margin-top: 0;
+        margin-left: 192px;
+    }
+    .profile-info p {
+        margin-top: 5px;
+    }
+    img{
+    width: 200px;
+    height: 183px;
+    }
+</style>
+
+<h1>Welcome {{ username }}, </h1>
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Welcome  {{ username }},</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Share Your Additional Information </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+
+        <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="row gy-5 gx-4">
+                    <div class="col-lg-8">
+                        <div class="d-flex align-items-center mb-5">
+                            <img class="flex-shrink-0 img-fluid border rounded" src="{{ user.profile_image.url }}" alt="" style="width: 80px; height: 80px;">
+                            <div class="text-start ps-4">
+                                <h3 class="mb-3">{{user.username}} </h3>
+                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{statenames.statename}}, {{citynames.citynames}}</span>
+                                <span class="text-truncate me-3"><i class="fas fa-desktop text-primary me-2"></i>{{user.email}}</span>
+                                <span class="text-truncate me-0"><i class="fas fa-graduation-cap text-primary me-2"></i> {{quali.Qualification}}</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="mb-3">About Youself  </h4>
+                            <p>{% if pro_data %}{{pro_data.about}} {% else %}  na   {% endif %}</p>
+                            <h4 class="mb-3">Education Information</h4>
+                            <p> {% if pro_data %}{{pro_data.education}} {% else %}  na   {% endif %}</p>
+                            <h4 class="mb-3">Company Name </h4>
+                            <p> {% if pro_data %}{{pro_data.company}},{{pro_data.designation}} {% else %}  na   {% endif %}</p>
+                            
+                            <h4 class="mb-3">Present Job Responsibility</h4>
+                            <p> {% if pro_data %}{{pro_data.job_responsibilities}}{% else %}  na   {% endif %}</p>
+                            
+                            <h4 class="mb-3">Experience Information </h4>
+                            <p> {% if pro_data %}{{pro_data.job_experience}}{% else %}  na   {% endif %}</p>
+                           
+
+
+                            <ul class="list-unstyled">
+               {% comment %}
+                                 <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
+                                 <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
+                                 <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
+                                 <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
+                                 <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
+               {% endcomment %}
+                            </ul>
+                           
+                            
+                                   {% comment %}        
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
+                            </ul>
+                             {% endcomment %}
+                        </div>
+        
+                        <div class="">
+                            
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-12 col-sm-6">
+                                        
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                      
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                    
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        
+                                    </div>
+                                    <div class="col-12">
+                                        
+                                    </div>
+                                    <div class="col-12">
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Additional Features</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><a href="/profile_data">Edit Profile</a></p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><a href="/testimonial">Add Testimonial</a></p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><a href="/view_jobs">Posted Jobs List</a></p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><a href="/job_post">Add Jobs </a></p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Job Detail End -->
+
+
+
+
+
+{% endblock %}
+

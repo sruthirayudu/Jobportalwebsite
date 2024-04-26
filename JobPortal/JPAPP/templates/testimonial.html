@@ -1,0 +1,118 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<style>
+    form-control:disabled, .form-control:read-only {
+     background-color: white;
+     color:grey;
+       
+    }
+.error{
+
+    color:red;
+}
+h3{
+    color:#00B074;
+}
+
+
+</style>
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Testimonial</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Share Your Experience </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+<!-- Header End -->
+<div align="center">
+<div class="col-md-10" >
+    <form method="post" id="testi" name="testi">
+        {% csrf_token %}
+        {{ serializer.errors }}
+     <div>   <h3><div id="registration-success-message"></h3></div>
+      <div>
+               <div class="row g-3">
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name ">
+                        <label for="name">Your Name</label>
+                        <div id="titleError" style="color:red"></div>
+                    </div>
+                </div>
+               
+
+
+                <div class="col-6">
+                 <div class="form-floating">
+                    <input type="text" class="form-control" id="pro" name="pro" placeholder="Your Profession ">
+                    <label for="pro">Your Profession</label>
+                       <div id="proError"></div>
+                 </div>
+
+             </div>
+             <div class="col-6">
+             <div class="form-floating">
+                <input type="file" class="form-control" id="img" name="img" accept="" >
+                <label for="img">Image</label>
+                <div id="imgError" style="color:red"></div>
+            </div>
+        </div>
+       
+
+                   <div class="col-6">
+                    <div class="form-floating">
+                           <textarea class="form-control" id="description" name="description" rows="6"  placeholder="Enter your Experience in Job Portal" required></textarea>
+                           <label for="desc">Your Experience with Job Portal</label>
+                           <div id="descriptionError"></div>
+                    </div>
+                   </div>
+                  
+   
+                   <div class="col-12">
+                       <button class="btn btn-primary w-100 py-3" id="submit" name="submit" type="submit" >Post It </button>
+                      
+                   </div>
+               </div>
+           </form>
+       
+    
+  
+
+
+
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

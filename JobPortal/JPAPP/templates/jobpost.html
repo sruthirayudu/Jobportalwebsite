@@ -1,0 +1,266 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<style>
+    form-control:disabled, .form-control:read-only {
+     background-color: white;
+     color:grey;
+       
+    }
+.error{
+
+    color:red;
+}
+h3{
+    color:#00B074;
+}
+
+
+</style>
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Post The Job</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Post The Job , {{username}}</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+<!-- Header End -->
+<div align="center">
+<div class="col-md-10" >
+    <form method="post" id="JobForm" name="JobForm">
+        {% csrf_token %}
+        {{ serializer.errors }}
+     <div>   <h3><div id="registration-success-message"></h3></div>
+      <div>
+               <div class="row g-3">
+                   <div class="col-md-6">
+                       <div class="form-floating">
+                           <input type="text" class="form-control" id="title" name="title" placeholder="Job title ">
+                           <label for="title">Job Title</label>
+                           <div id="titleError" style="color:red"></div>
+                       </div>
+                   </div>
+                  
+
+
+                   <div class="col-6">
+                    <div class="form-floating">
+                        <select name="jobcat" id="jobcatdrop" class="form-control" >
+                            <option value="">Job Category</option>
+                            
+                          </select>
+                          <div id="jobcatError"></div>
+                    </div>
+
+                </div>
+
+                   <div class="col-12">
+                       <div class="form-floating">
+                           <textarea class="form-control" id="description" name="description" rows="6"  placeholder="Enter job Description" required></textarea>
+                           <label for="description">Job Description</label>
+                           <div id="descriptionError"></div>
+                       </div>
+                   </div>
+                   <div class="col-12">
+                       <div class="form-floating">
+                        <textarea class="form-control" id="role" name="role" rows="3" placeholder="Enter job Responsibilities" required></textarea>                        
+                           <label for="role">Job Responsibilities </label>
+                           <div id="roleError"></div>
+                       </div>
+                   </div>
+
+                   <div class="col-12">
+                
+                    <div class="form-floating">
+                        <textarea class="form-control" id="jobsumm" name="jobsumm" rows="3" placeholder="Enter job Summary" required></textarea>
+                        
+                        <label for="jobsumm">Job Summary  </label>
+                        <div id="jobsummError"></div>
+                  </div>
+                </div>
+    
+                   
+                   <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="skills" name="skills" placeholder="Skills Required ">
+                        <label for="skills">Skills Required</label>
+                        <div id="skillsError" style="color:red"></div>
+                    </div>
+                </div>
+                   
+   
+                 <div class="col-6">
+                   <div class="form-floating">
+                   <select name="Qualification" id="qualifyDropdown" class="form-control" >
+                       <option value="">Qualification</option>
+                       
+                     </select>
+                     <div id="qualifyError"></div>
+                 </div>
+               </div>
+               
+               <div class="col-6">
+                   <div class="form-floating">
+                     <select id="stateDropdown" name="state" class="form-control">
+                        <option value="">Select State</option>
+                    </select>
+                     <div id="stateError"></div>
+                 </div>
+               </div>
+               
+               <div class="col-6">
+                   <div class="form-floating">
+                   <select name="city" id="cityDropdown" class="form-control" >
+                       <option value="">City</option>
+                     </select>
+                     <div id="cityError"></div>
+                 </div>
+               </div>
+            
+                
+               <div class="col-6">
+                   
+                   <div class="form-floating">
+                       <input type="text" class="form-control" id="salary" name="salary" placeholder="Salary Package.. ">
+                       <label for="salary">Salary </label>
+                       <div id="salaryError"></div>
+                 </div>
+               </div>
+   
+               <div class="col-6">
+                   
+                <div class="form-floating">
+
+                    <select name="job_type" id="job_type" class="form-control" >
+                    <option value="">Job Type</option>
+                    <option value="Remote">Remote</option>
+                    <option value="WFH">Work From Home</option>
+                    <option value="Full-time">Full Time</option>
+                    <option value="Part-time">Part Time</option>
+                  </select>
+                    
+
+                    <label for="job_type"> </label>
+                    <div id="job_typeError"></div>
+              </div>
+            </div>
+
+
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="vacancy" name="vacancy" placeholder="No of Vcancies ">
+                   <label for="vacancy">Vacancy Position </label>
+                  <div id="vacancyError"></div>
+              </div>
+            </div>
+         
+             
+            <div class="col-6">
+                
+                <div class="form-floating">
+                     <input type="date" id="joindate" name="joindate"  min="20-4-2024"  class="form-control"required>
+
+                
+                    <label for="joindate">Closing Date  </label>
+                    <div id="joindateError"></div>
+              </div>
+            </div>
+            
+            
+            <div class="col-12">
+                
+                <div class="form-floating">
+                    <textarea class="form-control" id="comp" name="comp" rows="3" placeholder="Enter Company Details " required></textarea>
+                    
+                    <label for="comp">Company Details  </label>
+                    <div id="compError"></div>
+              </div>
+            </div>
+
+            
+            <div class="col-6">
+                <div class="form-floating">
+                    <select name="preference" id="preference" class="form-control" >
+                        <option value="">Job Prefence</option>                      
+                        <option value="Fresher"> Fresher</option>
+                        <option value="Experienced">Experienced</option>
+                        <option value="1 yr Experience"> 1 yr Experience</option>
+                        <option value="Above 1yr Experience">Above 1yr Experience</option>
+                        <option value="Above 2yr Experience">Above 2yr Experience</option>
+                        <option value="Above 5yr Experience">Above 5yr Experience</option>
+                        <option value="Above 10yr Experience">Above 10yr Experience</option>
+                      </select>
+                   <label for="preference">Preference  </label>
+                  <div id="preferenceError"></div>
+              </div>
+            </div>
+
+            <div class="col-6">
+                
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="compname" name="compname" placeholder="Company Name ">
+                    <label for="compname">Company Name  </label>
+                    <div id="compnameError"></div>
+              </div>
+            </div>
+
+            
+         
+            
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="file" class="form-control" id="logo" name="logo" placeholder="Company Logo " accept="image/*">
+                   <label for="logo">Company Logo </label>
+                  <div id="logoError"></div>
+              </div>
+            </div>
+         
+
+                   
+   
+                   <div class="col-12">
+                       <button class="btn btn-primary w-100 py-3" id="submit" name="submit" type="submit" >Post The Job</button>
+                      
+                   </div>
+               </div>
+           </form>
+       
+    
+  
+
+
+
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

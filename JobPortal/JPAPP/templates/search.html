@@ -1,0 +1,42 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    
+    <!-- Display Job Details -->
+    <h2>Job Details</h2>
+    <ul>
+        {% for job in data %}
+            <li>
+                <h3>{{ job.Title }}</h3>
+                <p>Description: {{ job.Description }}</p>
+                <p>Role: {{ job.Role }}</p>
+                <!-- Add more job details as needed -->
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Display State List -->
+    <h2>State List</h2>
+    <ul>
+        {% for state in statelist %}
+            <li>{{ state.Statename }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Display City List -->
+    <h2>City List</h2>
+    <ul>
+        {% for city in citylist %}
+            <li>{{ city.Citynames }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

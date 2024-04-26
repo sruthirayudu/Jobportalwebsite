@@ -1,0 +1,292 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+
+
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Yours Jobs List</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Posted Jobs List</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+
+    <style>
+
+
+    
+        <!-- Jobs Start -->
+
+
+   
+ 
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div>   <a href="/view_jobs/">Back</a></div>
+                <h1 class="text-center mb-5 " >Applications List</h1>
+                <div class="tab-class text-center wow" >
+                   
+                            
+                          
+                           
+                    <style>
+                        #searchInput {
+                            padding: 8px;
+                            margin-bottom: 10px;
+                            width: 200px;
+                            border: 1px solid #ccc;
+                            border-radius: 4px;
+                            box-sizing: border-box; /* Ensure padding and border are included in the width */
+                        }
+                
+                        /* Style the table */
+                        #dataTable {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                
+                        /* Style the table header */
+                        #dataTable th {
+                            background-color: #f2f2f2;
+                            padding: 8px;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                        }
+                
+                        /* Style the table rows */
+                        #dataTable td {
+                            padding: 8px;
+                            border-bottom: 1px solid #ddd;
+                        }
+                
+                        /* Style alternate row background */
+                        #dataTable tbody tr:nth-child(even) {
+                            background-color: #f2f2f2;
+                        }
+
+                        .pagination {
+                            list-style-type: none;
+                            margin: 20px 0;
+                            padding: 0;
+                            text-align: center;
+                        }
+                
+                        .pagination li {
+                            display: inline;
+                            margin-right: 5px;
+                        }
+                
+                        .pagination li a {
+                            text-decoration: none;
+                            padding: 5px 10px;
+                            border: 1px solid #ccc;
+                            background-color: #f9f9f9;
+                        }
+                
+                        .pagination li a:hover {
+                            background-color: #ddd;
+                        }
+                
+                        #myTable tbody tr {
+                            display: none;
+                        }
+                
+                        #myTable tbody tr.page.active {
+                            display: table-row;
+                        }
+                        .blurred {
+                            color: transparent;
+                            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Adjust the shadow intensity as needed */
+                        }
+
+                    </style>
+                </head>
+                <body>
+                    <div align="Right">
+                    <input type="text" id="searchInput" placeholder="Search..."></div>
+                    <div class="table-container">
+                        
+                        <table class="data-table"  id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>S.no</th>
+                                    <th>Name</th>
+                                    <th>Qualification</th>
+                                    <th>City</th>
+                                    <th>Company</th>
+                                    <th>Company Status</th>
+                                    <th>Skills</th>
+                                    <th>Languages Known</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Resume</th>
+                                    <th>Delete</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if paginated_data1 %}
+
+                                {% for app in paginated_data1%}
+                                <tr >
+                                    <td>1</td>
+                                    <td>{{app.name}}</td>
+                                    <td >{{app.qualification}}</td>
+                                    <td >{{app.city}}</td>
+                                    <td >{{app.company}}</td>
+                                    <td >{{app.company_status}}</td>
+                                    <td >{{app.skills}}</td>
+                                    <td >{{app.languages}}</td>
+                                   
+                                    {% if  app.application_status %}
+                                    <td >{{app.email}}</td>
+                                    <td >{{app.mobile}}</td>
+                                    <td><a href="/media/{{ app.resume }}"><i class="fa fa-download text-primary"></i>
+                                        <td> <a href="/application_del/{{app.id}}"><i class="fa fa-trash text-primary"></i></a></td>
+                                       
+                                    </a></td>
+                                    
+                                    {% else %}
+                                  <td colspan=4>  Contact Admin For More Information</td>
+                                    {% endif %}
+                                    
+                                </tr>
+                               {% endfor %}
+                              
+                               <!-- Add more rows here if needed -->
+                           
+                            {% else %}
+                            <tr> No records Found</tr>
+                            {% endif %}
+                        </tbody>
+                        </table>
+                      
+
+                        <div class="pagination justify-content-center">
+                            <ul class="pagination">
+                                {% if paginated_data1.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?all=1">&laquo; First</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?all={{ paginated_data1.previous_page_number }}">Previous</a>
+                                    </li>
+                                {% endif %}
+                        
+                                <li class="page-item active">
+                                    <span class="page-link">
+                                        Page {{ paginated_data1.number }} of {{ paginated_data1.paginator.num_pages }}
+                                    </span>
+                                </li>
+                        
+                                {% if paginated_data1.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?all={{ paginated_data1.next_page_number }}">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?all={{ paginated_data1.paginator.num_pages }}">Last &raquo;</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+<script>
+
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("dataTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Change index to match column you want to search
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    document.getElementById("searchInput").addEventListener("keyup", searchTable);
+
+
+  
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+                       
+                      
+                        
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+
+
+                    
+
+
+
+                      
+
+                         
+                        
+
+
+
+
+                   
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Jobs End -->
+
+
+    {% endblock %}

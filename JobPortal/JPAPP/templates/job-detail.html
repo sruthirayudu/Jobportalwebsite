@@ -1,0 +1,147 @@
+{% extends 'job-header.html' %}
+{% block body_block%}
+{% load static %}
+
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Jobs List</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Jobs List</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header 
+        <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="row gy-5 gx-4">
+                    <div class="col-lg-8">
+                        <div class="d-flex align-items-center mb-5">
+                            <img class="flex-shrink-0 img-fluid border rounded" src="/media/{{info.0.5}}" alt="" style="width: 80px; height: 80px;">
+                            <div class="text-start ps-4">
+                                <h3 class="mb-3">{{ info.0.1 }} </h3>
+                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{info.0.16}}, {{info.0.15}}</span>
+                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{info.0.2}}</span>
+                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{info.0.3}}</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="mb-3">Job description</h4>
+                            <i class="fa fa-angle-right text-primary me-2"></i>{{info.0.6}}
+                            <h4 class="mb-3">Responsibility</h4>
+                            
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>{{info.0.7}}</li>
+                                <h4 class="mb-3">Job Summary</h4>
+                            
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>{{info.0.9}}</li>
+                           
+                            <h4 class="mb-3">Skills</h4>
+                            <p> {{info.0.8}}</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Graduation : {{info.0.17}}</li>
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Preference : {{info.0.12}}</li>
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>Disignation: {{info.0.18}}</li>
+                               
+                            </ul>
+                        </div>
+        
+                        <div class="">
+                            <h4 class="mb-4">Apply For The Job</h4>
+                            <form id="applyjob" name="applyjob" method="post">
+                                {% csrf_token %}
+                                {{ serializer.errors }}
+                                <div>   <h3><div id="job-success-message" style="color:red" align="center"></h3></div>
+                             
+                                <input type="hidden" id="jobid" name="jobid" value="{{info.0.0}}">
+                                <input type="hidden" id="username" name="username" value="{{username}}"> 
+                                <div class="row g-3">
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Your Name">
+                                        <div id="nameError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="email" class="form-control" name="email" id="email"  placeholder="Your Email">
+                                        <div id="emailError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" id="mobile" name="mobile"  placeholder="Mobile Number">
+                                        <div id="mobileError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="file" name="file"  id="file" class="form-control bg-white" accept=".doc, .docx, .pdf">
+                                        <div id="fileError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" id="qualification" name="qualification"  placeholder="Your Qualification">
+                                          <div id="qualifyError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" id="city" name="city"  placeholder="Your City" >
+                                         <div id="cityError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" id="comp" name="comp"  placeholder="Your Current Company Name" >
+                                         <div id="compError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                         <select id="cstatus" name="cstatus" class="form-control" style="background-color:white">
+                                             <option value="">Your Current Status</option>
+                                             <option value="Fresher">Fresher</option>
+                                             <option value="Experienced">Experienced</option>
+                                         </select>
+                                         <div id="cstatusError" style="color:red"></div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-6">
+                                            <input type="text" class="form-control" id="skills" name="skills"  placeholder="Your Skills.........." >
+                                             <div id="skillsError" style="color:red"></div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-6">
+                                            <input type="text" class="form-control" id="lang" name="lang"  placeholder="Languages Known...........">
+                                            <div id="langError" style="color:red"></div>
+                                        </div>
+
+
+
+                                    <div class="col-12">
+                                        <textarea class="form-control" rows="5" name="desc" id="desc" placeholder="About Yourself"></textarea>
+                                        <div id="descError" style="color:red"></div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Job Summery</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Published On:  {{info.0.14}}
+                            </p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{info.0.10}} Position</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{info.0.2}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{info.0.3}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{info.15}}, {{info.0.16}}</p>
+                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: {{info.0.4}}</p>
+                        </div>
+                        <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Company Detail</h4>
+                            <p class="m-0">CompanyName: {{info.0.13}} </p>
+                            <p class="m-0">{{info.0.11}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Job Detail End -->
+
+
+        {% endblock %}
